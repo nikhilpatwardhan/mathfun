@@ -30,19 +30,21 @@ def graph(x, y):
 def run(N, p):
     x = list(range(0, N+1))
     y = list(binomial(N, p))
-    # graph(x, y)
-
-def main():
-    timing_x = range(10,90,5)
-    timing_y = []
+    graph(x, y)
+    
+def timeComplexityTest():
+    timing_x, timing_y = range(10,25,5), []
     for i in timing_x:
-        timing_y.append(timeit.timeit('run(%d, 0.8)' % i, setup='from __main__ import run', number=10000))
+        timing_y.append(timeit.timeit('list(binomial(%d, 0.8))' % i, setup='from __main__ import binomial', number=10000))
     
     plt.plot(timing_x, timing_y)
     plt.xlabel('N')
-    plt.ylabel('Runtime')
+    plt.ylabel('Runtime (seconds)')
     plt.title('Runtimes for increasing N')
     plt.show()
+
+def main():
+    timeComplexityTest()
 
 if __name__ == '__main__':
     main()
